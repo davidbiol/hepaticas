@@ -1,0 +1,28 @@
+Package: hepaticas
+Type: Package
+Title: Evidence-based Phylogeny and Tree Inference for Colombian Liverworts
+Version: 0.1.0
+Authors@R:
+    c(person(given = "David",
+             family = "Gutiérrez-Duque",
+             role = c("aut", "cre"),
+             email = "davidgd2015@gmail.com",
+             comment = c(ORCID = "0000-0001-8493-6452")),
+      person(given = "Yeison",
+             family = "Jaroc",
+             role = "aut",
+             email = "-",
+             comment = c( ORCID = "-")))
+Maintainer: David Gutiérrez-Duque <davidgd2015@gmail.com>
+Description: MA system for 'declaratively' creating graphics,
+    based on "The Grammar of Graphics". You provide the data, tell 'hepaticas'
+    how to map variables to aesthetics, what graphical primitives to use,
+    and it takes care of the details.
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/davidbiol/hepaticas
+BugReports: https://github.com/davidbiol/hepaticas/issues
+RoxygenNote: 7.3.1
+Imports: 
+    ape
+License: MIT + file LICENSE
