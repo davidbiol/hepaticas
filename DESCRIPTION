@@ -8,16 +8,14 @@ Authors@R:
              role = c("aut", "cre"),
              email = "davidgd2015@gmail.com",
              comment = c(ORCID = "0000-0001-8493-6452")),
-      person(given = "Yeison",
-             family = "Jaroc",
+      person(given = "Yeison Jaroc",
+             family = "Lombo-Sanchez",
              role = "aut",
              email = "-",
              comment = c( ORCID = "-")))
 Maintainer: David Gutiérrez-Duque <davidgd2015@gmail.com>
-Description: MA system for 'declaratively' creating graphics,
-    based on "The Grammar of Graphics". You provide the data, tell 'hepaticas'
-    how to map variables to aesthetics, what graphical primitives to use,
-    and it takes care of the details.
+Description: Phylogenetic relationships of Colombian liverworts. 
+    The relationships can be known among families, genera or species.
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/davidbiol/hepaticas
@@ -29,3 +27,6 @@ Imports:
 License: MIT + file LICENSE
 Depends: 
     R (>= 2.10)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
