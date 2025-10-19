@@ -4,7 +4,7 @@
 \alias{tree_by_genus}
 \title{Prunes a phylogenetic tree to include only a specified set of genera}
 \usage{
-tree_by_genus(genus_vector, input_tree)
+tree_by_genus(genus_vector, input_tree, tolerance = 2)
 }
 \arguments{
 \item{genus_vector}{A character vector containing the names of the genera
@@ -12,6 +12,8 @@ that should be retained in the new tree. These names must exactly match
 tip labels in the input_tree.}
 
 \item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
+
+\item{tolerance}{A number representing the tolerance of character edits for each element of genus_vector input. tolerance = 0 means there is a perfect word match. Default is 2 (i.e. 2 character edits is the maximum tolerance).}
 }
 \value{
 A new 'phylo' object containing only the specified genus, or NULL

@@ -4,7 +4,7 @@
 \alias{tree_by_species}
 \title{Prunes a phylogenetic tree to include only a specified set of species}
 \usage{
-tree_by_species(species_vector, input_tree)
+tree_by_species(species_vector, input_tree, tolerance = 2)
 }
 \arguments{
 \item{species_vector}{A character vector containing the names of the species
@@ -12,6 +12,8 @@ that should be retained in the new tree. These names must exactly match
 tip labels in the input_tree.}
 
 \item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
+
+\item{tolerance}{A number representing the tolerance of character edits for each element of species_vector input. tolerance = 0 means there is a perfect word match. Default is 2 (i.e. 2 character edits is the maximum tolerance).}
 }
 \value{
 A new 'phylo' object containing only the specified species, or NULL

@@ -4,6 +4,7 @@
 #'        that should be retained in the new tree. These names must exactly match
 #'        tip labels in the input_tree.
 #' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
+#' @param tolerance A number representing the tolerance of character edits for each element of species_vector input. tolerance = 0 means there is a perfect word match. Default is 2 (i.e. 2 character edits is the maximum tolerance).
 #' @return A new 'phylo' object containing only the specified species, or NULL
 #'         if an error occurs (e.g., no common species found).
 #' @export
@@ -11,7 +12,7 @@
 #' species_list <- c("Herbertus_sendtneri", "Micropterygium_carinatum", "Lepidozia_pinnaticruris", "Bazzania_pallidevirens", "Bazzania_jamaicensis", "Plagiochila_simplex", "Plagiochila_revolvens")
 #' output_tree <- tree_by_species(species_list)
 #' plot(output_tree) #Graph
-tree_by_species <- function(species_vector, input_tree) {
+tree_by_species <- function(species_vector, input_tree, tolerance = 2) {
   data("speciesTree")
   input_tree <- speciesTree
   # Ensure the input is a 'phylo' object
@@ -44,7 +45,7 @@ tree_by_species <- function(species_vector, input_tree) {
 
     # Condition 2: Close Match (Throw error with suggestion)
     # Set a reasonable tolerance, e.g., 1 or 2 character edits
-    if (min_distance <= 2) {
+    if (min_distance <= tolerance) {
 
       # We use rlang::abort to construct the exact error message with the hint.
       # The 'class' argument prevents the error message from being simplified
