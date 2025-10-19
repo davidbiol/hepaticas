@@ -4,14 +4,14 @@
 \alias{tree_by_genus}
 \title{Prunes a phylogenetic tree to include only a specified set of genera}
 \usage{
-tree_by_genus(genus, input_tree)
+tree_by_genus(genus_vector, input_tree)
 }
 \arguments{
-\item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
-
-\item{genus_to_keep}{A character vector containing the names of the genus
+\item{genus_vector}{A character vector containing the names of the genera
 that should be retained in the new tree. These names must exactly match
 tip labels in the input_tree.}
+
+\item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
 }
 \value{
 A new 'phylo' object containing only the specified genus, or NULL

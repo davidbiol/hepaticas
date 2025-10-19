@@ -4,14 +4,14 @@
 \alias{tree_by_family}
 \title{Prunes a phylogenetic tree to include only a specified set of families}
 \usage{
-tree_by_family(family, input_tree)
+tree_by_family(family_vector, input_tree)
 }
 \arguments{
-\item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
-
-\item{family_to_keep}{A character vector containing the names of the family
+\item{family_vector}{A character vector containing the names of the families
 that should be retained in the new tree. These names must exactly match
 tip labels in the input_tree.}
+
+\item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
 }
 \value{
 A new 'phylo' object containing only the specified family, or NULL

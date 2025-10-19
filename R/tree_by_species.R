@@ -1,13 +1,17 @@
 #' Prunes a phylogenetic tree to include only a specified set of species
 #'
-#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
-#' @param species_to_keep A character vector containing the names of the species
+#' @param species_vector A character vector containing the names of the species
 #'        that should be retained in the new tree. These names must exactly match
 #'        tip labels in the input_tree.
+#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
 #' @return A new 'phylo' object containing only the specified species, or NULL
 #'         if an error occurs (e.g., no common species found).
 #' @export
-tree_by_species <- function(species, input_tree) {
+#' @examples
+#' species_list <- c("Herbertus_sendtneri", "Micropterygium_carinatum", "Lepidozia_pinnaticruris", "Bazzania_pallidevirens", "Bazzania_jamaicensis", "Plagiochila_simplex", "Plagiochila_revolvens")
+#' output_tree <- tree_by_species(species_list)
+#' plot(output_tree) #Graph
+tree_by_species <- function(species_vector, input_tree) {
   data("speciesTree")
   input_tree <- speciesTree
   # Ensure the input is a 'phylo' object
@@ -19,7 +23,7 @@ tree_by_species <- function(species, input_tree) {
   all_tips <- input_tree$tip.label
 
   # Identify species in 'species_to_keep' that are NOT in the input tree
-  species_not_found <- setdiff(species, all_tips)
+  species_not_found <- setdiff(species_vector, all_tips)
   if (length(species_not_found) > 0) {
     warning(paste("The following species were not found in the input tree and will be ignored:",
                   paste(species_not_found, collapse = ", ")))
@@ -27,7 +31,7 @@ tree_by_species <- function(species, input_tree) {
 
   # Identify species to drop: all tips in the input tree MINUS the ones we want to keep
   # We only consider species_to_keep that are actually present in the tree
-  valid_species_to_keep <- intersect(species, all_tips)
+  valid_species_to_keep <- intersect(species_vector, all_tips)
 
   if (length(valid_species_to_keep) == 0) {
     message("No valid species to keep were found in the input tree. Returning NULL.")
@@ -53,8 +57,3 @@ tree_by_species <- function(species, input_tree) {
 
   return(pruned_tree)
 }
-
-#Es importante agregar la función que aproxima el nombre cuando está mal escrito
-
-#new_tree <- prune_tree_by_species(speciesTree, c("Bazzania", "Bazzania", "Calypogeia", "Trichocolea", "Leiomitra", "Mnioloma", "Paracromastigum", "Pseudocephalozia", "Telaranea", "Zoopsidella"))
-#plot(new_tree)

@@ -4,14 +4,14 @@
 \alias{tree_by_species}
 \title{Prunes a phylogenetic tree to include only a specified set of species}
 \usage{
-tree_by_species(species, input_tree)
+tree_by_species(species_vector, input_tree)
 }
 \arguments{
-\item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
-
-\item{species_to_keep}{A character vector containing the names of the species
+\item{species_vector}{A character vector containing the names of the species
 that should be retained in the new tree. These names must exactly match
 tip labels in the input_tree.}
+
+\item{input_tree}{An object of class 'phylo' representing the input phylogenetic tree.}
 }
 \value{
 A new 'phylo' object containing only the specified species, or NULL
@@ -19,4 +19,9 @@ A new 'phylo' object containing only the specified species, or NULL
 }
 \description{
 Prunes a phylogenetic tree to include only a specified set of species
+}
+\examples{
+species_list <- c("Herbertus_sendtneri", "Micropterygium_carinatum", "Lepidozia_pinnaticruris", "Bazzania_pallidevirens", "Bazzania_jamaicensis", "Plagiochila_simplex", "Plagiochila_revolvens")
+output_tree <- tree_by_species(species_list)
+plot(output_tree) #Graph
 }

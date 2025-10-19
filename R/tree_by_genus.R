@@ -1,13 +1,13 @@
 #' Prunes a phylogenetic tree to include only a specified set of genera
 #'
-#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
-#' @param genus_to_keep A character vector containing the names of the genus
+#' @param genus_vector A character vector containing the names of the genera
 #'        that should be retained in the new tree. These names must exactly match
 #'        tip labels in the input_tree.
+#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
 #' @return A new 'phylo' object containing only the specified genus, or NULL
 #'         if an error occurs (e.g., no common genus found).
 #' @export
-tree_by_genus <- function(genus, input_tree) {
+tree_by_genus <- function(genus_vector, input_tree) {
   data("genusTree")
   input_tree <- genusTree
   # Ensure the input is a 'phylo' object
@@ -19,7 +19,7 @@ tree_by_genus <- function(genus, input_tree) {
   all_tips <- input_tree$tip.label
 
   # Identify genus in 'genus_to_keep' that are NOT in the input tree
-  genus_not_found <- setdiff(genus, all_tips)
+  genus_not_found <- setdiff(genus_vector, all_tips)
   if (length(genus_not_found) > 0) {
     warning(paste("The following genus were not found in the input tree and will be ignored:",
                   paste(genus_not_found, collapse = ", ")))
@@ -27,7 +27,7 @@ tree_by_genus <- function(genus, input_tree) {
 
   # Identify genus to drop: all tips in the input tree MINUS the ones we want to keep
   # We only consider genus_to_keep that are actually present in the tree
-  valid_genus_to_keep <- intersect(genus, all_tips)
+  valid_genus_to_keep <- intersect(genus_vector, all_tips)
 
   if (length(valid_genus_to_keep) == 0) {
     message("No valid genus to keep were found in the input tree. Returning NULL.")
@@ -53,8 +53,3 @@ tree_by_genus <- function(genus, input_tree) {
 
   return(pruned_tree)
 }
-
-#Es importante agregar la función que aproxima el nombre cuando está mal escrito
-
-#new_tree <- prune_tree_by_genus(genusTree, c("Bazzania", "Bazzania", "Calypogeia", "Trichocolea", "Leiomitra", "Mnioloma", "Paracromastigum", "Pseudocephalozia", "Telaranea", "Zoopsidella"))
-#plot(new_tree)

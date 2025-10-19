@@ -1,13 +1,13 @@
 #' Prunes a phylogenetic tree to include only a specified set of families
 #'
-#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
-#' @param family_to_keep A character vector containing the names of the family
+#' @param family_vector A character vector containing the names of the families
 #'        that should be retained in the new tree. These names must exactly match
 #'        tip labels in the input_tree.
+#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
 #' @return A new 'phylo' object containing only the specified family, or NULL
 #'         if an error occurs (e.g., no common family found).
 #' @export
-tree_by_family <- function(family, input_tree) {
+tree_by_family <- function(family_vector, input_tree) {
   data("familyTree")
   input_tree <- familyTree
   # Ensure the input is a 'phylo' object
@@ -19,7 +19,7 @@ tree_by_family <- function(family, input_tree) {
   all_tips <- input_tree$tip.label
 
   # Identify family in 'family_to_keep' that are NOT in the input tree
-  family_not_found <- setdiff(family, all_tips)
+  family_not_found <- setdiff(family_vector, all_tips)
   if (length(family_not_found) > 0) {
     warning(paste("The following family were not found in the input tree and will be ignored:",
                   paste(family_not_found, collapse = ", ")))
@@ -27,7 +27,7 @@ tree_by_family <- function(family, input_tree) {
 
   # Identify family to drop: all tips in the input tree MINUS the ones we want to keep
   # We only consider family_to_keep that are actually present in the tree
-  valid_family_to_keep <- intersect(family, all_tips)
+  valid_family_to_keep <- intersect(family_vector, all_tips)
 
   if (length(valid_family_to_keep) == 0) {
     message("No valid family to keep were found in the input tree. Returning NULL.")
@@ -53,8 +53,3 @@ tree_by_family <- function(family, input_tree) {
 
   return(pruned_tree)
 }
-
-#Es importante agregar la función que aproxima el nombre cuando está mal escrito
-
-#new_tree <- prune_tree_by_family(familyTree, c("Bazzania", "Bazzania", "Calypogeia", "Trichocolea", "Leiomitra", "Mnioloma", "Paracromastigum", "Pseudocephalozia", "Telaranea", "Zoopsidella"))
-#plot(new_tree)
