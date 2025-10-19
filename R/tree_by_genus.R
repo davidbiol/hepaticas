@@ -22,6 +22,63 @@ tree_by_genus <- function(genus_vector, input_tree) {
   # Get all tip labels from the input tree
   all_tips <- input_tree$tip.label
 
+  # Identify mismatches
+  validate_genus <- function(input_genus, valid_options) {
+
+    # Calculate Levenshtein distance (edit distance)
+    distances <- utils::adist(input_genus, valid_options)
+
+    # Find the index of the closest valid option
+    best_match_index <- which.min(distances)
+    min_distance <- min(distances)
+
+    # Get the closest valid string
+    closest_match <- valid_options[best_match_index]
+
+    # --- Logic for Error/Suggestion ---
+
+    # Condition 1: Perfect Match (No error, continue)
+    if (min_distance == 0) {
+      return(input_genus)
+    }
+
+    # Condition 2: Close Match (Throw error with suggestion)
+    # Set a reasonable tolerance, e.g., 1 or 2 character edits
+    if (min_distance <= 2) {
+
+      # We use rlang::abort to construct the exact error message with the hint.
+      # The 'class' argument prevents the error message from being simplified
+      # and ensures the hint is visible.
+      rlang::abort(
+        message = c(
+          # The main error line (you can make this a placeholder or hide it)
+          "x" = paste0("Invalid input: \"", input_genus, "\"."),
+          # The desired suggestion line (using the 'i' structure for info)
+          "i" = paste0("Did you mean \"", closest_match, "\"?")
+        ),
+        class = "genus_mismatch_error" # Custom error class
+      )
+
+    } else {
+      # Condition 3: No Acceptable Match (Throw hard error)
+      rlang::abort(
+        paste0("Input '", input_genus, "' is not a valid genus and is too dissimilar from known options."),
+        class = "genus_mismatch_error"
+      )
+    }
+  }
+
+  # This will trigger the custom error output:
+  for (i in seq_len(length(genus_vector))){
+    tryCatch(
+      validate_genus(genus_vector[i], valid_options = all_tips),
+      error = function(e) {
+        # This structure is necessary to print the formatted rlang error message
+        cat(conditionMessage(e), "\n")
+      }
+    )
+  }
+
   # Identify genus in 'genus_to_keep' that are NOT in the input tree
   genus_not_found <- setdiff(genus_vector, all_tips)
   if (length(genus_not_found) > 0) {
