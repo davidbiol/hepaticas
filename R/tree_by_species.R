@@ -9,7 +9,7 @@
 #'         if an error occurs (e.g., no common species found).
 #' @export
 #' @examples
-#' species_list <- c("Herbertus_sendtneri", "Micropterygium_carinatum", "Lepidozia_pinnaticruris", "Bazzania_pallidevirens", "Bazzania_jamaicensis", "Plagiochila_simplex", "Plagiochila_revolvens")
+#' species_list <- c("Herbertus sendtneri", "Micropterygium carinatum", "Lepidozia pinnaticruris", "Bazzania pallidevirens", "Bazzania jamaicensis", "Plagiochila simplex", "Plagiochila revolvens")
 #' output_tree <- tree_by_species(species_list)
 #' plot(output_tree) #Graph
 tree_by_species <- function(species_vector, input_tree, tolerance = 2) {
@@ -22,6 +22,10 @@ tree_by_species <- function(species_vector, input_tree, tolerance = 2) {
 
   # Get all tip labels from the input tree
   all_tips <- input_tree$tip.label
+
+  # Standarize names
+  species_vector <- stringr::str_to_sentence(species_vector)
+  species_vector <- gsub("_", " ", species_vector)
 
   # Identify mismatches
   validate_species <- function(input_species, valid_options) {

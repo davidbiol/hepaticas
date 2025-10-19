@@ -23,6 +23,9 @@ tree_by_genus <- function(genus_vector, input_tree, tolerance = 2) {
   # Get all tip labels from the input tree
   all_tips <- input_tree$tip.label
 
+  # Standarize names
+  genus_vector <- stringr::str_to_sentence(genus_vector)
+
   # Identify mismatches
   validate_genus <- function(input_genus, valid_options) {
 

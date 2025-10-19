@@ -23,7 +23,7 @@ A new 'phylo' object containing only the specified species, or NULL
 Prunes a phylogenetic tree to include only a specified set of species
 }
 \examples{
-species_list <- c("Herbertus_sendtneri", "Micropterygium_carinatum", "Lepidozia_pinnaticruris", "Bazzania_pallidevirens", "Bazzania_jamaicensis", "Plagiochila_simplex", "Plagiochila_revolvens")
+species_list <- c("Herbertus sendtneri", "Micropterygium carinatum", "Lepidozia pinnaticruris", "Bazzania pallidevirens", "Bazzania jamaicensis", "Plagiochila simplex", "Plagiochila revolvens")
 output_tree <- tree_by_species(species_list)
 plot(output_tree) #Graph
 }

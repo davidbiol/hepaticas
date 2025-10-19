@@ -9,7 +9,7 @@
 #'         if an error occurs (e.g., no common family found).
 #' @export
 #' @examples
-#' family_list <- c("PLAGIOCHILACEAE", "RADULACEAE", "METZGERIACEAE", "MARCHANTIACEAE", "AYTONIACEAE", "LEPICOLEACEAE", "JUNGERMANNIACEAE")
+#' family_list <- c("Plagiochilaceae", "Radulaceae", "Metzgeriaceae", "Marchantiaceae", "Aytoniaceae", "Lepicoleaceae", "Jungermanniaceae")
 #' output_tree <- tree_by_family(family_list)
 #' plot(output_tree) #Graph
 tree_by_family <- function(family_vector, input_tree, tolerance = 2) {
@@ -22,6 +22,9 @@ tree_by_family <- function(family_vector, input_tree, tolerance = 2) {
 
   # Get all tip labels from the input tree
   all_tips <- input_tree$tip.label
+
+  # Standarize names
+  family_vector <- stringr::str_to_sentence(family_vector)
 
   # Identify mismatches
   validate_family <- function(input_family, valid_options) {
