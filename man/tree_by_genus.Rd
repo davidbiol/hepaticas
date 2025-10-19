@@ -20,3 +20,8 @@ A new 'phylo' object containing only the specified genus, or NULL
 \description{
 Prunes a phylogenetic tree to include only a specified set of genera
 }
+\examples{
+genus_list <- c("Bazzania", "Bazzania", "Calypogeia", "Trichocolea", "Leiomitra", "Mnioloma", "Paracromastigum", "Pseudocephalozia", "Telaranea", "Zoopsidella")
+output_tree <- tree_by_genus(genus_list)
+plot(output_tree) #Graph
+}

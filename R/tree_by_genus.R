@@ -7,6 +7,10 @@
 #' @return A new 'phylo' object containing only the specified genus, or NULL
 #'         if an error occurs (e.g., no common genus found).
 #' @export
+#' @examples
+#' genus_list <- c("Bazzania", "Bazzania", "Calypogeia", "Trichocolea", "Leiomitra", "Mnioloma", "Paracromastigum", "Pseudocephalozia", "Telaranea", "Zoopsidella")
+#' output_tree <- tree_by_genus(genus_list)
+#' plot(output_tree) #Graph
 tree_by_genus <- function(genus_vector, input_tree) {
   data("genusTree")
   input_tree <- genusTree

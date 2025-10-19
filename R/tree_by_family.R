@@ -7,6 +7,10 @@
 #' @return A new 'phylo' object containing only the specified family, or NULL
 #'         if an error occurs (e.g., no common family found).
 #' @export
+#' @examples
+#' family_list <- c("PLAGIOCHILACEAE", "RADULACEAE", "METZGERIACEAE", "MARCHANTIACEAE", "AYTONIACEAE", "LEPICOLEACEAE", "JUNGERMANNIACEAE")
+#' output_tree <- tree_by_family(family_list)
+#' plot(output_tree) #Graph
 tree_by_family <- function(family_vector, input_tree) {
   data("familyTree")
   input_tree <- familyTree

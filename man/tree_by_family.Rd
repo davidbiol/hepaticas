@@ -20,3 +20,8 @@ A new 'phylo' object containing only the specified family, or NULL
 \description{
 Prunes a phylogenetic tree to include only a specified set of families
 }
+\examples{
+family_list <- c("PLAGIOCHILACEAE", "RADULACEAE", "METZGERIACEAE", "MARCHANTIACEAE", "AYTONIACEAE", "LEPICOLEACEAE", "JUNGERMANNIACEAE")
+output_tree <- tree_by_family(family_list)
+plot(output_tree) #Graph
+}
