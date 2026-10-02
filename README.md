@@ -18,4 +18,5 @@ development version of hepaticas:
 ``` r
 library(remotes)
 remotes::install_github("davidbiol/hepaticas")
+library(hepaticas)
 ```
