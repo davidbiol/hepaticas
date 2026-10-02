@@ -7,7 +7,7 @@ among with functions for manipulating these datasets. Datasets can be found as a
 You can prune the family cladogram with the function `tree_by_family`, the genera cladogram with the function `tree_by_genus`, and
 the species cladogram with the function `tree_by_species`. 
 
-There is also a species for adding morphotypes or adding species not included in the datasets. It is `add_species`. The function 
+There is also a function for adding morphotypes or for adding species not included in the datasets. It is `add_species`. The function 
 automatically include the species with the exisiting genus.
 
 ## Installation
