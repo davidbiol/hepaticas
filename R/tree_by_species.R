@@ -13,14 +13,16 @@
 #' output_tree <- tree_by_species(species_list)
 #' plot(output_tree) #Graph
 tree_by_species <- function(species_vector, input_tree, tolerance = 2) {
-  data("speciesTree")
-  input_tree <- speciesTree
+  #data("speciesTree_proof")
+
+  input_tree <- speciesTree_proof
   # Ensure the input is a 'phylo' object
   if (!inherits(input_tree, "phylo")) {
     stop("Input 'input_tree' must be an object of class 'phylo'.")
   }
 
   # Get all tip labels from the input tree
+  input_tree$tip.label <- gsub("_", " ", input_tree$tip.label)
   all_tips <- input_tree$tip.label
 
   # Standarize names

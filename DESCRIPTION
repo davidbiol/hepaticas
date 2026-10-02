@@ -18,15 +18,16 @@ Description: Phylogenetic relationships of Colombian liverworts.
     The relationships can be known among families, genera or species.
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 URL: https://github.com/davidbiol/hepaticas
 BugReports: https://github.com/davidbiol/hepaticas/issues
-RoxygenNote: 7.3.1
 Imports: 
     ape,
     phytools
 License: MIT + file LICENSE
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
