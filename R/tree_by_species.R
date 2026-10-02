@@ -3,7 +3,9 @@
 #' @param species_vector A character vector containing the names of the species
 #'        that should be retained in the new tree. These names must exactly match
 #'        tip labels in the input_tree.
-#' @param input_tree An object of class 'phylo' representing the input phylogenetic tree.
+#' @param input_tree An object of class 'phylo' representing the phylogenetic tree,
+#'   or a character string specifying the file path to a `.nwk`, `.tre`, or `.rda` file.
+#'   Defaults to the package dataset `speciesTree`.
 #' @param tolerance A number representing the tolerance of character edits for each element of species_vector input. tolerance = 0 means there is a perfect word match. Default is 2 (i.e. 2 character edits is the maximum tolerance).
 #' @return A new 'phylo' object containing only the specified species, or NULL
 #'         if an error occurs (e.g., no common species found).
@@ -12,13 +14,36 @@
 #' species_list <- c("Herbertus sendtneri", "Micropterygium carinatum", "Lepidozia pinnaticruris", "Bazzania pallidevirens", "Bazzania jamaicensis", "Plagiochila simplex", "Plagiochila revolvens")
 #' output_tree <- tree_by_species(species_list)
 #' plot(output_tree) #Graph
-tree_by_species <- function(species_vector, input_tree, tolerance = 2) {
-  #data("speciesTree_proof")
+tree_by_species <- function(species_vector, input_tree = speciesTree, tolerance = 2) {
 
-  input_tree <- speciesTree_proof
-  # Ensure the input is a 'phylo' object
+  # Resolve and Load `input_tree`
+  if (is.character(input_tree) && length(input_tree) == 1) {
+    if (!file.exists(input_tree)) {
+      stop(paste0("Specified file path does not exist: ", input_tree))
+    }
+
+    ext <- tolower(tools::file_ext(input_tree))
+
+    if (ext %in% c("nwk", "tre", "tree")) {
+      input_tree <- ape::read.tree(input_tree)
+    } else if (ext == "rda" || ext == "rdata") {
+      env <- new.env()
+      loaded_objs <- load(input_tree, envir = env)
+      phylo_objs <- sapply(loaded_objs, function(obj) inherits(env[[obj]], "phylo"))
+
+      if (!any(phylo_objs)) {
+        stop("The .rda file does not contain an object of class 'phylo'.")
+      }
+      # Take the first 'phylo' object found in the .rda
+      input_tree <- env[[ loaded_objs[phylo_objs][1] ]]
+    } else {
+      stop("Unsupported file format. Please provide a path to a .nwk, .tre, or .rda file.")
+    }
+  }
+
+  # Ensure input is now a 'phylo' object
   if (!inherits(input_tree, "phylo")) {
-    stop("Input 'input_tree' must be an object of class 'phylo'.")
+    stop("Input 'input_tree' must be an object of class 'phylo' or a valid file path.")
   }
 
   # Get all tip labels from the input tree

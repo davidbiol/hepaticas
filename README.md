@@ -16,6 +16,6 @@ We have not a released version yet, however, you can install the
 development version of hepaticas:
 
 ``` r
-install.packages("remotes")
+library(remotes)
 remotes::install_github("davidbiol/hepaticas")
 ```
