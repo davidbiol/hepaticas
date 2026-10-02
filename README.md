@@ -1,7 +1,7 @@
 # hepaticas: Colombian Liverworts
 
 hepaticas is an R package that provides datasets of phylogenetic relationships of Colombian liverworts (i.e. cladograms),
-among with functions for manipulating these datasets. Datasets can be found as a newcick file (.nwk)in 
+among with functions for manipulating these datasets. Datasets can be found as a newcick file (.nwk) in 
 [trees/newick](trees/newick), as a tree file (.tre) in [trees/tree](trees/tree), and as an R data file (.rda) in [data](data).
 
 You can prune the family cladogram with the function `tree_by_family`, the genera cladogram with the function `tree_by_genus`, and
